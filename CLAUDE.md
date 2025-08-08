@@ -197,7 +197,7 @@ const messages = {
 
 #### 사용자 경험 개선
 - 드래그 앤 드롭 PDF 업로드
-- 실시간 시험 진행률 표시  
+- 실시간 시험 진행률 표시
 - 반응형 디자인 개선
 - 로딩 상태 및 에러 처리 강화
 
@@ -361,7 +361,7 @@ npm run test      # (개발 예정)
 - **PDF Processing:** Apache PDFBox
 - **Build Tool:** Gradle
 
-### Frontend  
+### Frontend
 - **Framework:** Vue.js 3 + TypeScript
 - **State Management:** Pinia
 - **Routing:** Vue Router 4
@@ -389,7 +389,7 @@ npm run test      # (개발 예정)
 - ✅ 기본 사용자 관리
 - ✅ Vue.js 프론트엔드 구조
 - ⏳ PDF 업로드 시스템 (Phase 1)
-- ⏳ Gemini API 통합 (Phase 2)  
+- ⏳ Gemini API 통합 (Phase 2)
 - ⏳ 문제 생성 시스템 (Phase 3)
 - ⏳ 평가 및 채점 시스템 (Phase 4)
 - ⏳ 다국어 지원 (Phase 5)

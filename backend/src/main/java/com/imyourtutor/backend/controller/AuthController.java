@@ -75,6 +75,17 @@ public class AuthController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/me")
+    public ResponseEntity<UserResponseDTO> getMe(HttpSession session) {
+        UserResponseDTO user = (UserResponseDTO) session.getAttribute("user");
+        
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        
+        return ResponseEntity.ok(user);
+    }
+
     @GetMapping("/check")
     public ResponseEntity<Map<String, Object>> checkAuthStatus(HttpSession session) {
         UserResponseDTO user = (UserResponseDTO) session.getAttribute("user");

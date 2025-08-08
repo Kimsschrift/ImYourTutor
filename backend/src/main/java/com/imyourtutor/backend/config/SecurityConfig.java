@@ -33,13 +33,13 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable) // CSRF(Cross-Site Request Forgery) 공격을 방지하는 기능
                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // CORS(Cross-Origin Resource Sharing)설정, 이 설정을 통해서 Frontend의 Domain으로 부터의 요청 허락
                 .authorizeHttpRequests(auth -> auth // 접근 권한 설정
-                        .requestMatchers("/", "/login", "/oauth2/**", "/api/auth/**").permitAll()
+                        .requestMatchers("/", "/login", "/oauth2/**", "/api/auth/**", "/auth/**").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .oauth2Login(oauth2 -> oauth2
-                        .defaultSuccessUrl(frontendUrl + "/auth/success", true)
-                        .failureUrl(frontendUrl + "/auth/failure")
+                        .defaultSuccessUrl("/auth/success", true)
+                        .failureUrl("/auth/failure")
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(customOAuth2UserService())
                         )
