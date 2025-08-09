@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import LoginView from "../views/LoginView.vue";
+import { useAuthStore } from "../stores/auth";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -8,12 +9,12 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/login",
-    name: "login",
+    name: "Login",
     component: LoginView,
   },
   {
     path: "/dashboard",
-    name: "dashboard",
+    name: "Dashboard",
     component: () => import("../views/DashboardView.vue"),
   },
 ];
@@ -23,21 +24,6 @@ const router = createRouter({
   routes,
 });
 
-// 라우터 가드 임시 비활성화
-// router.beforeEach(async (to, from, next) => {
-//   const authStore = useAuthStore();
-
-//   if (!authStore.user && !authStore.isLoading) {
-//     await authStore.loadUser();
-//   }
-
-//   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-//     next("/login");
-//   } else if (to.meta.requiresGuest && authStore.isAuthenticated) {
-//     next("/dashboard");
-//   } else {
-//     next();
-//   }
-// });
+// 라우터 가드 완전 제거 - 백엔드에서 OAuth 처리
 
 export default router;

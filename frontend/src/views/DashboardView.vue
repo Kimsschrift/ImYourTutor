@@ -1,30 +1,5 @@
 <template>
   <div class="dashboard-container">
-    <header class="dashboard-header">
-      <div class="container">
-        <div class="header-content">
-          <div class="logo-section">
-            <h1 class="app-logo">ImYourTutor</h1>
-          </div>
-          <div class="user-section">
-            <div v-if="authStore.user" class="user-info">
-              <span class="welcome-text"
-                >안녕하세요, <strong>{{ authStore.user.name }}</strong
-                >님!</span
-              >
-              <button
-                @click="handleLogout"
-                class="logout-btn btn btn-secondary"
-              >
-                로그아웃
-              </button>
-            </div>
-            <div v-else class="loading-spinner"></div>
-          </div>
-        </div>
-      </div>
-    </header>
-
     <main class="dashboard-main">
       <div class="container">
         <div class="dashboard-content">
@@ -145,51 +120,9 @@ const handleLogout = async () => {
 <style scoped>
 .dashboard-container {
   min-height: 100vh;
-  background-color: #f8f9fa;
+  background-color: var(--background-gray);
 }
 
-.dashboard-header {
-  background-color: white;
-  border-bottom: 1px solid #e9ecef;
-  padding: 16px 0;
-}
-
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.app-logo {
-  font-size: 24px;
-  font-weight: 700;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.user-section {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.welcome-text {
-  font-size: 14px;
-  color: #6c757d;
-}
-
-.logout-btn {
-  padding: 8px 16px;
-  font-size: 14px;
-}
 
 .dashboard-main {
   padding: 32px 0;
@@ -207,13 +140,13 @@ const handleLogout = async () => {
 .section-title {
   font-size: 28px;
   font-weight: 600;
-  color: #2c3e50;
+  color: var(--text-primary);
   margin-bottom: 8px;
 }
 
 .section-description {
   font-size: 16px;
-  color: #6c757d;
+  color: var(--text-secondary);
   line-height: 1.6;
 }
 
@@ -241,13 +174,13 @@ const handleLogout = async () => {
 .feature-title {
   font-size: 20px;
   font-weight: 600;
-  color: #2c3e50;
+  color: var(--text-primary);
   margin-bottom: 12px;
 }
 
 .feature-description {
   font-size: 14px;
-  color: #6c757d;
+  color: var(--text-secondary);
   line-height: 1.5;
   margin-bottom: 20px;
 }
@@ -271,34 +204,24 @@ const handleLogout = async () => {
 .stat-item {
   text-align: center;
   padding: 20px;
-  background-color: #f8f9fa;
+  background-color: var(--light-gray);
   border-radius: 8px;
 }
 
 .stat-value {
   font-size: 32px;
   font-weight: 700;
-  color: #4285f4;
+  color: var(--primary-blue);
   margin-bottom: 4px;
 }
 
 .stat-label {
   font-size: 14px;
-  color: #6c757d;
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
 @media (max-width: 768px) {
-  .header-content {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .user-info {
-    flex-direction: column;
-    gap: 12px;
-  }
-
   .features-grid {
     grid-template-columns: 1fr;
   }

@@ -1,20 +1,23 @@
 <template>
   <div class="login-container">
-    <div class="login-card card">
+    <div class="login-wrapper">
       <div class="logo-section">
         <h1 class="app-title">ImYourTutor</h1>
-        <p class="app-subtitle">
-          개인 맞춤형 학습 플랫폼에 오신 것을 환영합니다
-        </p>
+        <p class="app-subtitle">AI 기반 개인 맞춤형 학습 플랫폼</p>
       </div>
-
+      
       <div class="login-section">
-        <h2 class="login-title">로그인</h2>
-        <p class="login-description">Google 계정으로 간편하게 로그인하세요</p>
-
+        <h2>로그인</h2>
+        <p class="login-description">Google 계정으로 간편하게 시작하세요</p>
+        
+        <!-- 오류 메시지 표시 -->
+        <div v-if="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
+        
         <button
           @click="handleGoogleLogin"
-          class="google-login-btn btn"
+          class="google-login-btn"
           :disabled="isLoading"
         >
           <div v-if="isLoading" class="loading-spinner"></div>
@@ -42,30 +45,40 @@
               d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
             />
           </svg>
-          <span class="btn-text">Google로 로그인</span>
+          <span>Google로 로그인</span>
         </button>
-      </div>
-
-      <div class="footer-section">
-        <p class="terms-text">
-          로그인하면 <a href="#" class="terms-link">서비스 이용약관</a>과
-          <a href="#" class="terms-link">개인정보처리방침</a>에 동의하는 것으로
-          간주됩니다.
-        </p>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useAuthStore } from "../stores/auth";
+import { useRoute } from "vue-router";
 
 const authStore = useAuthStore();
+const route = useRoute();
 const isLoading = ref(false);
+const errorMessage = ref("");
+
+// OAuth 오류 처리
+onMounted(() => {
+  const error = route.query.error;
+  if (error === 'oauth') {
+    errorMessage.value = "Google 로그인 중 오류가 발생했습니다. 다시 시도해주세요.";
+    // URL에서 error 파라미터 제거 (깔끔하게)
+    const url = new URL(window.location.href);
+    url.searchParams.delete('error');
+    window.history.replaceState({}, '', url.pathname);
+  }
+});
 
 const handleGoogleLogin = () => {
   isLoading.value = true;
+  errorMessage.value = ""; // 오류 메시지 초기화
+  // Google OAuth 페이지로 리다이렉트
+  // 성공하면 백엔드에서 바로 /dashboard로 리다이렉트됨
   authStore.login();
 };
 </script>
@@ -76,13 +89,19 @@ const handleGoogleLogin = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-color: var(--background-gray);
   padding: 20px;
 }
 
-.login-card {
+.login-wrapper {
   width: 100%;
-  max-width: 450px;
+  max-width: 440px;
+  padding: 48px;
+  box-sizing: border-box;
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 2px 10px var(--shadow-medium);
+  border: 1px solid var(--border-color);
   text-align: center;
 }
 
@@ -90,58 +109,77 @@ const handleGoogleLogin = () => {
   margin-bottom: 40px;
 }
 
+
 .app-title {
-  font-size: 32px;
-  font-weight: 700;
-  color: #2c3e50;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--primary-blue);
   margin-bottom: 8px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
 }
 
 .app-subtitle {
-  font-size: 16px;
-  color: #6c757d;
-  line-height: 1.5;
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 0;
 }
 
 .login-section {
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 
-.login-title {
+.login-section > h2 {
   font-size: 24px;
-  font-weight: 600;
-  color: #2c3e50;
+  color: var(--text-primary);
   margin-bottom: 8px;
+  font-weight: 400;
 }
 
 .login-description {
   font-size: 14px;
-  color: #6c757d;
-  margin-bottom: 32px;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.error-message {
+  background-color: #FEF7F7;
+  border: 1px solid #F5C6C6;
+  border-radius: 8px;
+  color: #D93025;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .google-login-btn {
   width: 100%;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  background-color: white;
-  border: 2px solid #e0e0e0;
-  color: #333;
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 16px;
   font-weight: 500;
-  transition: all 0.3s ease;
-  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
 }
 
 .google-login-btn:hover {
-  border-color: #4285f4;
-  box-shadow: 0 4px 12px rgba(66, 133, 244, 0.15);
-  transform: translateY(-1px);
+  background-color: var(--light-gray);
+  border-color: var(--medium-gray);
+  box-shadow: 0 1px 3px var(--shadow-light);
 }
 
 .google-login-btn:disabled {
@@ -154,42 +192,29 @@ const handleGoogleLogin = () => {
   flex-shrink: 0;
 }
 
-.btn-text {
-  font-size: 16px;
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--medium-gray);
+  border-top: 2px solid var(--primary-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }
 
-.footer-section {
-  border-top: 1px solid #e9ecef;
-  padding-top: 24px;
-}
-
-.terms-text {
-  font-size: 12px;
-  color: #6c757d;
-  line-height: 1.5;
-}
-
-.terms-link {
-  color: #4285f4;
-  text-decoration: none;
-}
-
-.terms-link:hover {
-  text-decoration: underline;
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 @media (max-width: 480px) {
-  .login-card {
+  .login-wrapper {
     margin: 20px;
-    padding: 24px;
+    padding: 32px 24px;
   }
-
+  
   .app-title {
-    font-size: 28px;
+    font-size: 24px;
   }
-
-  .login-title {
-    font-size: 20px;
-  }
+  
 }
 </style>

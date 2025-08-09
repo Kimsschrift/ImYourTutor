@@ -1,3 +1,21 @@
+:root {
+  /* Google/Chrome 색상 테마 */
+  --primary-blue: #4285F4;
+  --primary-blue-hover: #3367D6;
+  --secondary-orange: #FF9800;
+  --secondary-orange-hover: #F57C00;
+  --background-gray: #FFFFFF;
+  --light-gray: #F8F9FA;
+  --medium-gray: #E0E0E0;
+  --dark-gray: #5F6368;
+  --text-primary: #202124;
+  --text-secondary: #5F6368;
+  --white: #FFFFFF;
+  --border-color: #DADCE0;
+  --shadow-light: rgba(60, 64, 67, 0.3);
+  --shadow-medium: rgba(60, 64, 67, 0.15);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,9 +23,9 @@
 }
 
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f5f5f5;
-  color: #333;
+  font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+  background-color: var(--background-gray);
+  color: var(--text-primary);
   line-height: 1.6;
 }
 
@@ -31,32 +49,43 @@ body {
 }
 
 .btn-primary {
-  background-color: #4285f4;
-  color: white;
+  background-color: var(--primary-blue);
+  color: var(--white);
 }
 
 .btn-primary:hover {
-  background-color: #357ae8;
+  background-color: var(--primary-blue-hover);
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(66, 133, 244, 0.3);
+  box-shadow: 0 4px 8px var(--shadow-medium);
 }
 
 .btn-secondary {
-  background-color: #f8f9fa;
-  color: #333;
-  border: 1px solid #dee2e6;
+  background-color: var(--light-gray);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
 }
 
 .btn-secondary:hover {
-  background-color: #e9ecef;
+  background-color: var(--medium-gray);
+}
+
+.btn-orange {
+  background-color: var(--secondary-orange);
+  color: var(--white);
+}
+
+.btn-orange:hover {
+  background-color: var(--secondary-orange-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(255, 152, 0, 0.3);
 }
 
 .card {
-  background: white;
+  background: var(--white);
   border-radius: 12px;
   padding: 32px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 12px var(--shadow-medium);
+  border: 1px solid var(--border-color);
 }
 
 .loading-spinner {

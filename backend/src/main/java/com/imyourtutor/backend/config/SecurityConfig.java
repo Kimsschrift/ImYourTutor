@@ -23,7 +23,7 @@ import java.util.List;
 // 웹사이트의 보안 규칙을 정하고, 누가 어떤 페이지에 접근할 수 있는지, 로그인과 로그아웃은 어떻게 처리할지를 설정
 public class SecurityConfig {
 
-    @Value("${frontend.url:http://localhost:3000}")
+    @Value("${frontend.url:http://localhost:8080}")
     private String frontendUrl;
 
     // 웹사이트로 들어오는 모든 요청 검문
@@ -38,8 +38,8 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .oauth2Login(oauth2 -> oauth2
-                        .defaultSuccessUrl("/auth/success", true)
-                        .failureUrl("/auth/failure")
+                        .defaultSuccessUrl(frontendUrl + "/dashboard", true)
+                        .failureUrl(frontendUrl + "/login?error=oauth")
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(customOAuth2UserService())
                         )

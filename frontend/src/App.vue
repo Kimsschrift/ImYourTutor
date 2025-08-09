@@ -1,8 +1,14 @@
 <template>
   <div id="app">
-    <router-view />
+    <GlobalLayout>
+      <router-view />
+    </GlobalLayout>
   </div>
 </template>
+
+<script setup lang="ts">
+import GlobalLayout from './components/GlobalLayout.vue';
+</script>
 
 <style>
 #app {
