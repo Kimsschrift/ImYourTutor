@@ -1,9 +1,19 @@
-# Build stage
+# Render-specific Dockerfile
 FROM eclipse-temurin:21-jdk-alpine AS builder
 
 WORKDIR /app
-COPY . .
-RUN chmod +x gradlew && ./gradlew build -x test
+
+# Copy gradle wrapper and build files
+COPY gradlew gradlew.bat ./
+COPY gradle/ gradle/
+COPY build.gradle settings.gradle ./
+
+# Copy source code
+COPY src/ src/
+
+# Make gradlew executable and build
+RUN chmod +x gradlew
+RUN ./gradlew build -x test --no-daemon
 
 # Runtime stage
 FROM eclipse-temurin:21-jre-alpine
@@ -11,8 +21,8 @@ FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 COPY --from=builder /app/build/libs/*.jar app.jar
 
-# 포트는 Render에서 동적으로 할당
+# Render uses dynamic port assignment
 EXPOSE $PORT
 
-# 애플리케이션 실행
+# Run application with dynamic port
 ENTRYPOINT ["java", "-Dserver.port=${PORT:-8081}", "-jar", "app.jar"]
