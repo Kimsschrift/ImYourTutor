@@ -1,20 +1,42 @@
 <template>
+  <!-- 전체 화면 중앙에 로그인 박스 위치 시키기 위한 역할 login-container -->
   <div class="login-container">
+    <!-- 교육 테마 애니메이션 배경 -->
+    <div class="education-illustration">
+      <svg class="floating-books" viewBox="0 0 200 100">
+        <g class="book" v-for="(book, index) in books" :key="index">
+          <rect
+            :x="book.x"
+            :y="book.y"
+            width="15"
+            height="20"
+            :fill="book.color"
+            rx="2"
+            class="floating"
+          />
+        </g>
+      </svg>
+    </div>
+
+    <!-- 실제로 사용자에게 보이는 로그인 박스 login-wrapper -->
     <div class="login-wrapper">
       <div class="logo-section">
-        <h1 class="app-title">ImYourTutor</h1>
+        <div class="logo-container" @click="goToHome">
+          <img src="@/assets/Logo.png" alt="ImYourTutor" class="logo-image" />
+          <h1 class="app-title">ImYourTutor</h1>
+        </div>
         <p class="app-subtitle">AI 기반 개인 맞춤형 학습 플랫폼</p>
       </div>
-      
+
       <div class="login-section">
         <h2>로그인</h2>
         <p class="login-description">Google 계정으로 간편하게 시작하세요</p>
-        
+
         <!-- 오류 메시지 표시 -->
         <div v-if="errorMessage" class="error-message">
           {{ errorMessage }}
         </div>
-        
+
         <button
           @click="handleGoogleLogin"
           class="google-login-btn"
@@ -55,22 +77,35 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useAuthStore } from "../stores/auth";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
+// ref는 변수가 변경될 때 화면을 자동으로 업데이트 해주는 역할 반응형 변수 (reactive variables)
 const authStore = useAuthStore();
 const route = useRoute();
+const router = useRouter();
 const isLoading = ref(false);
 const errorMessage = ref("");
+
+// 교육 테마 애니메이션을 위한 책 데이터
+const books = ref([
+  { x: 20, y: 30, color: "#4285F4" },
+  { x: 50, y: 45, color: "#34A853" },
+  { x: 80, y: 25, color: "#FBBC05" },
+  { x: 110, y: 40, color: "#EA4335" },
+  { x: 140, y: 35, color: "#9C27B0" },
+  { x: 170, y: 50, color: "#FF9800" },
+]);
 
 // OAuth 오류 처리
 onMounted(() => {
   const error = route.query.error;
-  if (error === 'oauth') {
-    errorMessage.value = "Google 로그인 중 오류가 발생했습니다. 다시 시도해주세요.";
+  if (error === "oauth") {
+    errorMessage.value =
+      "Google 로그인 중 오류가 발생했습니다. 다시 시도해주세요.";
     // URL에서 error 파라미터 제거 (깔끔하게)
     const url = new URL(window.location.href);
-    url.searchParams.delete('error');
-    window.history.replaceState({}, '', url.pathname);
+    url.searchParams.delete("error");
+    window.history.replaceState({}, "", url.pathname);
   }
 });
 
@@ -81,9 +116,17 @@ const handleGoogleLogin = () => {
   // 성공하면 백엔드에서 바로 /dashboard로 리다이렉트됨
   authStore.login();
 };
+
+const goToHome = () => {
+  router.push('/');
+};
 </script>
 
 <style scoped>
+body {
+  background: linear-gradient(to bottom, #e0f7fa, #ffffff);
+}
+
 .login-container {
   min-height: 100vh;
   display: flex;
@@ -109,13 +152,31 @@ const handleGoogleLogin = () => {
   margin-bottom: 40px;
 }
 
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  margin-bottom: 8px;
+}
+
+.logo-container:hover {
+  transform: scale(1.05);
+}
+
+.logo-image {
+  height: 96px;
+  width: auto;
+}
 
 .app-title {
   font-size: 28px;
   font-weight: 600;
   color: var(--primary-blue);
-  margin-bottom: 8px;
-  font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+  margin: 0;
+  font-family: "Google Sans", "Roboto", Arial, sans-serif;
 }
 
 .app-subtitle {
@@ -142,10 +203,10 @@ const handleGoogleLogin = () => {
 }
 
 .error-message {
-  background-color: #FEF7F7;
-  border: 1px solid #F5C6C6;
+  background-color: #fef7f7;
+  border: 1px solid #f5c6c6;
   border-radius: 8px;
-  color: #D93025;
+  color: #d93025;
   padding: 12px 16px;
   margin-bottom: 24px;
   font-size: 14px;
@@ -154,8 +215,14 @@ const handleGoogleLogin = () => {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .google-login-btn {
@@ -173,7 +240,7 @@ const handleGoogleLogin = () => {
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+  font-family: "Google Sans", "Roboto", Arial, sans-serif;
 }
 
 .google-login-btn:hover {
@@ -202,8 +269,66 @@ const handleGoogleLogin = () => {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.education-illustration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.3;
+  z-index: 1;
+}
+
+.floating-books {
+  width: 100%;
+  height: 100%;
+}
+
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+.book:nth-child(1) .floating {
+  animation-delay: 0s;
+}
+.book:nth-child(2) .floating {
+  animation-delay: 0.5s;
+}
+.book:nth-child(3) .floating {
+  animation-delay: 1s;
+}
+.book:nth-child(4) .floating {
+  animation-delay: 1.5s;
+}
+.book:nth-child(5) .floating {
+  animation-delay: 2s;
+}
+.book:nth-child(6) .floating {
+  animation-delay: 2.5s;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.login-wrapper {
+  position: relative;
+  z-index: 2;
 }
 
 @media (max-width: 480px) {
@@ -211,10 +336,9 @@ const handleGoogleLogin = () => {
     margin: 20px;
     padding: 32px 24px;
   }
-  
+
   .app-title {
     font-size: 24px;
   }
-  
 }
 </style>

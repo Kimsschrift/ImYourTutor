@@ -1,7 +1,15 @@
 {
   "permissions": {
     "allow": [
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "WebFetch(domain:www.udemy.com)",
+      "Bash(ls:*)",
+      "Bash(claude mcp add sequential-thinking:*)",
+      "Bash(claude mcp add:*)",
+      "Bash(claude mcp:*)",
+      "Bash(timeout 10 npx @notionhq/notion-mcp-server --version)",
+      "Bash(claude restart)",
+      "mcp__sequential-thinking__sequentialthinking"
     ],
     "deny": []
   }

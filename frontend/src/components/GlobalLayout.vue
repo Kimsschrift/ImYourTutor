@@ -42,8 +42,8 @@ const route = useRoute();
 const router = useRouter();
 const authStore = useAuthStore();
 
-// 로그인 페이지에서는 헤더 숨김
-const isLoginPage = computed(() => route.name === 'Login');
+// 로그인 페이지와 StartPage에서는 헤더 숨김
+const isLoginPage = computed(() => route.name === 'Login' || route.name === 'StartPage');
 
 const goToHome = () => {
   if (authStore.isAuthenticated) {

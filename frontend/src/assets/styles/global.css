@@ -1,19 +1,70 @@
 :root {
-  /* Google/Chrome 색상 테마 */
-  --primary-blue: #4285F4;
-  --primary-blue-hover: #3367D6;
-  --secondary-orange: #FF9800;
-  --secondary-orange-hover: #F57C00;
-  --background-gray: #FFFFFF;
-  --light-gray: #F8F9FA;
-  --medium-gray: #E0E0E0;
-  --dark-gray: #5F6368;
-  --text-primary: #202124;
-  --text-secondary: #5F6368;
+  /* 2024 Modern Learning Platform Color Palette */
+  /* Primary Colors - Education & Trust */
+  --primary-blue: #2563EB;
+  --primary-blue-hover: #1D4ED8;
+  --primary-blue-light: #DBEAFE;
+  --primary-blue-dark: #1E40AF;
+  
+  /* Secondary Colors */
+  --secondary-green: #059669;
+  --secondary-green-hover: #047857;
+  --secondary-green-light: #D1FAE5;
+  
+  --accent-orange: #EA580C;
+  --accent-orange-hover: #C2410C;
+  --accent-orange-light: #FED7AA;
+  
+  --accent-purple: #7C3AED;
+  --accent-purple-hover: #6D28D9;
+  --accent-purple-light: #E9D5FF;
+  
+  /* Neutral Colors */
+  --background-main: #FAFBFC;
+  --background-card: #FFFFFF;
+  --background-overlay: rgba(15, 23, 42, 0.1);
+  
+  --surface-light: #F1F5F9;
+  --surface-medium: #E2E8F0;
+  --surface-dark: #CBD5E1;
+  
+  /* Text Colors */
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --text-tertiary: #94A3B8;
+  --text-white: #FFFFFF;
+  
+  /* Border & Shadow */
+  --border-light: #E2E8F0;
+  --border-medium: #CBD5E1;
+  --border-focus: var(--primary-blue);
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* Status Colors */
+  --success: var(--secondary-green);
+  --success-light: var(--secondary-green-light);
+  --warning: #F59E0B;
+  --warning-light: #FEF3C7;
+  --error: #DC2626;
+  --error-light: #FEE2E2;
+  --info: var(--primary-blue);
+  --info-light: var(--primary-blue-light);
+  
+  /* Legacy compatibility */
   --white: #FFFFFF;
-  --border-color: #DADCE0;
-  --shadow-light: rgba(60, 64, 67, 0.3);
-  --shadow-medium: rgba(60, 64, 67, 0.15);
+  --light-gray: var(--surface-light);
+  --medium-gray: var(--surface-medium);
+  --dark-gray: var(--text-secondary);
+  --border-color: var(--border-light);
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --shadow-medium: rgba(0, 0, 0, 0.1);
+  --background-gray: var(--background-main);
+  --secondary-orange: var(--accent-orange);
+  --secondary-orange-hover: var(--accent-orange-hover);
 }
 
 * {

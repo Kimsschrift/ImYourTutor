@@ -5,14 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6944a117-f194-4c41-a046-12438ac01688" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/assets/Logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.claude/settings.local.json" beforeDir="false" afterPath="$PROJECT_DIR$/.claude/settings.local.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/imyourtutor/backend/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/imyourtutor/backend/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/imyourtutor/backend/controller/AuthSuccessController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/assets/styles/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/styles/global.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/GlobalLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/GlobalLayout.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/router/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/router/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/stores/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/stores/auth.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/views/DashboardView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/DashboardView.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/views/LoginView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/LoginView.vue" afterDir="false" />
     </list>
@@ -180,6 +177,9 @@
       <workItem from="1754667343300" duration="9977000" />
       <workItem from="1754683029612" duration="2647000" />
       <workItem from="1754735459251" duration="4376000" />
+      <workItem from="1754835778812" duration="7505000" />
+      <workItem from="1754846767507" duration="5576000" />
+      <workItem from="1754856727743" duration="1762000" />
     </task>
     <servers />
   </component>
