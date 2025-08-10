@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: imyourtutor-backend
+    env: java
+    buildCommand: cd backend && chmod +x gradlew && ./gradlew build -x test
+    startCommand: cd backend && java -Dserver.port=$PORT -jar build/libs/*.jar
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: FRONTEND_URL
+        value: https://imyourtutor-ec4eb.web.app
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+    plan: free
